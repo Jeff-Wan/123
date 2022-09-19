@@ -1,0 +1,37 @@
+Initial state: Alive(Red), Alive(Wolf), Alive(Granny), Alive(Hunter), hasCake(Red), Hungry(Wolf)
+Goal state:  excaped(Red), escaped(Granny),
+
+Actions:
+        Eat (x,y)
+        Preconditions: Alive(x),Alive(y)
+        Postconditions: Alive(x),Hungry (y)
+
+        giveCake (x,y)
+        Preconditions: hasCake (x)
+        Postconditions: !hasCake (x),hasCake (y)
+
+        eatCake (x)
+        Preconditions: hasCake (x), Alive (cake)
+        Postconditions: Eaten (cake), !hasCake(x), !Alive(cake), !Hungry(x)
+
+        Run (x)
+        Preconditions: Alive(x)
+        Postconditions: running(x)
+
+        Catch (x, y)
+        Preconditions: Alive (x),Alive (y),running (y)
+        Postconditions: !running (y)
+        
+        Escape (x,y)
+        Preconditions: running (x)
+        Postconditions: Escaped(x),!running(x)
+        
+        kill(x,y)
+        Preconditions: Alive(x)
+        Postconditions: !Alive(x)
+        
+        Save
+        Preconditions: Eaten (x)
+        Postconditions: Alive(x),Escaped(x),!Eaten(x)
+        
+    
