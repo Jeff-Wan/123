@@ -1,28 +1,35 @@
-Initial state: BananasAt(B), At(A), Level(low), BoxAt(C)
-Goal state:    Have(Bananas)
+Initial state: Alive(Red), Alive(Wolf), Alive(Granny), Alive(Hunter), hasCake(Red), Hungry(Wolf)
+Goal state:  excaped(Red), escaped(Granny),
 
 Actions:
-               // move from X to Y
-               Move(X, Y)
-               Preconditions:  At(X), Level(low)
-               Postconditions: !At(X), At(Y)
-               
-               // climb up on the box
-               ClimbUp(Location)
-               Preconditions:  At(Location), BoxAt(Location), Level(low)
-               Postconditions: Level(high), !Level(low)
-               
-               // climb down from the box
-               ClimbDown(Location)
-               Preconditions:  At(Location), BoxAt(Location), Level(high)
-               Postconditions: Level(low), !Level(high)
-               
-               // move monkey and box from X to Y
-               MoveBox(X, Y)
-               Preconditions:  At(X), BoxAt(X), Level(low)
-               Postconditions: BoxAt(Y), !BoxAt(X), At(Y), !At(X)
-               
-               // take the bananas
-               TakeBananas(Location)
-               Preconditions:  BananasAt(Location), At(Location), Level(high)
-               Postconditions: Have(Bananas)
+        Eat (x,y)
+        Preconditions: Alive(x),Alive(y)
+        Postconditions: Alive(x),Hungry (y)
+
+        giveCake (x,y)
+        Preconditions: hasCake (x)
+        Postconditions: !hasCake (x),hasCake (y)
+
+        eatCake (x)
+        Preconditions: hasCake (x), Alive (cake)
+        Postconditions: Eaten (cake), !hasCake(x), !Alive(cake), !Hungry(x)
+
+        Run (x)
+        Preconditions: Alive(x)
+        Postconditions: running(x)
+
+        Catch (x, y)
+        Preconditions: Alive (x),Alive (y),running (y)
+        Postconditions: !running (y)
+        
+        Escape (x,y)
+        Preconditions: running (x)
+        Postconditions: Escaped(x),!running(x)
+        
+        kill(x,y)
+        Preconditions: Alive(x)
+        Postconditions: !Alive(x)
+        
+        Save
+        Preconditions: Eaten (x)
+        Postconditions: Alive(x),Escaped(x),!Eaten(x)
